@@ -21,16 +21,17 @@
 
 
       <!-- 선호 스타일 조사 영역 -->
-      <div @click="styleCdChange()">
-        <button>OPEN!</button>
+      <div>
+        <button @click="styleCdChange()">여길 눌러서 스타일 세팅....</button>
       </div>
       <div class="card_area">
         <div class="card-group">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
-              <p class="card-text">온도에 알맞아요.</p>
-              <p class="card-text">온도에 맞지 않아요.</p>
+              <p class="card-text">날씨에 알맞아요.</p>
+              <p class="card-text">날씨보다 추워요.</p>
+              <p class="card-text">날씨보다 더워요.</p>
               <img class="card-img-top" src="temp.png" alt="Card image cap">
             </div>
             <div class="card-footer">
@@ -61,7 +62,7 @@
 
     
     <!-- 선호 스타일 조사 영역 -->
-    <div :class="{ notion_area:isStyleCdChange }" v-show="isStyleCdChange">
+    <div :class="{ notion_area:isStyleCdChange }" v-if="isStyleCdChange">
       <span>좋아하는 연예인을 입력해주세요!</span>
       <br>
       <span>{{ notion }}</span>
@@ -143,9 +144,8 @@ export default {
   },
   methods: {
     getAnswer() {
-      const self = this
-        if(self.styleCd.length >= 2) {
-          self.notion = '아하!'+self.styleCd+'을 좋아하시는 군요.';
+        if(this.styleCd.length >= 2) {
+          this.notion = '아하!'+this.styleCd+'을 좋아하시는 군요.';
         }
     },
     noticeDetail(no) {
@@ -157,8 +157,7 @@ export default {
       alert("상세 모달 띄우기!" + no);
     },
     styleCdChange() {
-      self.isStyleCdChange = !self.isStyleCdChange;
-      console.log("=============="+self.isStyleCdChange);
+      this.isStyleCdChange = !this.isStyleCdChange;
     }
   },
 }
@@ -193,16 +192,15 @@ a {
 }
 
 .craw_area {
-  width: 30em;
+  width: fit-content;
   margin-left: auto;
   margin-right: auto;
   font-family: 'Gaegu', cursive;
-  display: grid;
+  display: table;
 }
 ._crew_title {
-  margin-left: 8rem;
   margin-top: 1em;
-  margin-bottom: -5px;
+  margin-bottom: -3px;
   color: #41b883;
   text-align: left;
 }
