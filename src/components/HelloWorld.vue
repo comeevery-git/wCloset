@@ -1,29 +1,52 @@
 <template>
   <div class="hello_area">
+    <!-- 버튼 모음 -->
+    <div class="button_area">
+      <ul>
+        <li><button @click="styleCdChange()">스타일 체크</button></li>
+        <li><button @click="noticeOpenChange()">공지사항</button></li>
+      </ul>  
+    </div>
+    
     <div class="hello">
       <h1>{{ msg }}</h1>
-      Need a set of equal width and height cards that aren’t attached to one another? Use card decks.
-      <font-awesome-icon icon="user-secret" />
+
       <div class="craw_area">
-        <p class="_crew_title">
-          위치
-        </p>
         <div>
-          <font-awesome-icon icon="user-secret" />
+          <p class="_craw_title">
+            위치
+          </p>
+          <div>
+            서울특별시 중림로 중구
+          </div>
+          <p class="_craw_title">
+            현재온도
+          </p>
+          <div>
+            <font-awesome-icon icon="user-secret" />
+            맑음 17°
+            <br>
+            어제보다 0° 높아요
+          </div>
         </div>
-        <p class="_crew_title">
-          현재온도
-        </p>
-        <div>
-          <font-awesome-icon icon="user-secret" />
+        <div class="_craw_week">
+          <p class="_craw_title">
+            주간온도
+          </p>
+8° 
+09시구름많음
+9° 
+10시구름많음
+11° 
+11시흐림
+12° 
+12시흐림
+13° 
+13시흐림
         </div>
       </div>
 
-
-      <!-- 선호 스타일 조사 영역 -->
-      <div>
-        <button @click="styleCdChange()">여길 눌러서 스타일 세팅....</button>
-      </div>
+      <!-- 메인 컨텐츠 모음 -->
       <div class="card_area">
         <div class="card-group">
           <div class="card">
@@ -59,7 +82,6 @@
         </div>
       </div>
     </div>
-
     
     <!-- 선호 스타일 조사 영역 -->
     <div :class="{ notion_area:isStyleCdChange }" v-if="isStyleCdChange">
@@ -72,7 +94,7 @@
 
 
     <!-- 공지사항 영역 -->
-    <div class="notice_area">
+    <div :class="{ notice_area:isNoticeOpenChange }" v-if="isNoticeOpenChange">
       <b-table-simple hover small caption-top responsive>
         <caption class="_caption">&nbsp;공지사항</caption>
         <b-thead>
@@ -93,9 +115,8 @@
         </b-tbody>
       </b-table-simple>
     </div>
-
-
   </div>
+  
 </template>
 
 <script>
@@ -130,7 +151,8 @@ export default {
           content: ""
         },
       ],
-      isStyleCdChange: false
+      isStyleCdChange: false,
+      isNoticeOpenChange: false
     }
   },
   watch: {
@@ -158,6 +180,9 @@ export default {
     },
     styleCdChange() {
       this.isStyleCdChange = !this.isStyleCdChange;
+    },
+    noticeOpenChange() {
+      this.isNoticeOpenChange = !this.isNoticeOpenChange;
     }
   },
 }
@@ -174,7 +199,7 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 0.2em;
 }
 a {
   color: #42b983;
@@ -193,15 +218,17 @@ a {
 
 .craw_area {
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  text-align-last: center;
   font-family: 'Gaegu', cursive;
   display: table;
+
+  margin-left: auto;
+  margin-right: auto;
 }
-._crew_title {
-  margin-top: 1em;
+._craw_title {
   margin-bottom: -3px;
   color: #41b883;
+  font-weight: bold;
   text-align: left;
 }
 
@@ -220,6 +247,18 @@ a {
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-size: 12px;
+}
+
+.button_area {
+
+}
+
+.button_area button {
+  margin-right: 1em;
+  border-radius: 2em;
+  padding: 0.3em 0.8em 0.3em 0.8em;
+  border-color: aliceblue;
+  color: #35495e;
 }
 
 ._caption {
